@@ -27,9 +27,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "resque-status"
   spec.add_development_dependency "resque-loner"
   spec.add_development_dependency "resque-lock-timeout"
-  spec.add_development_dependency "resque_spec"
 
   spec.add_development_dependency "sidekiq"
+  spec.add_development_dependency "sidekiq-lock"
   spec.add_development_dependency "sidekiq_status"
   spec.add_development_dependency "sidekiq-unique-jobs"
   spec.add_development_dependency "sidekiq-delay"

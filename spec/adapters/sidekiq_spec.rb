@@ -28,5 +28,40 @@ describe MultiWorker do
       expect(TestWorker).to receive(:perform).once.with("foo")
       TestWorker.perform("foo")
     end
+
+    context "with advanced options" do
+      it "configures :retry option" do
+        retry_worker = Class.new do
+          worker :retry => {:limit => 10, :delay => lambda {|count| count*5} }
+        end
+
+        retry_worker.get_sidekiq_options['retry'].should == 10
+        retry_worker.sidekiq_retry_in_block.call(3).should == 15
+      end
+
+      it "configures :lock option" do
+        locking_worker = Class.new do
+          worker :lock => true
+        end
+
+        locking_worker.get_sidekiq_options['lock'].should be_true
+      end
+
+      it "configures :unique option" do
+        unique_worker = Class.new do
+          worker :unique => true
+        end
+
+        unique_worker.get_sidekiq_options['unique'].should be_true
+      end
+
+      it "configures :status option" do
+        status_worker = Class.new do
+          worker :status => true
+        end
+
+        status_worker.new.should be_a ::SidekiqStatus::Worker
+      end
+    end
   end
 end

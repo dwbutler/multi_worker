@@ -28,7 +28,13 @@ module MultiWorker
     end
 
     def default_options
-      {:queue => default_queue}
+      {
+        :queue => default_queue,
+        :status => false,
+        :retry => false,
+        :lock => false,
+        :unique => false
+      }
     end
 
     attr_accessor :default_queue

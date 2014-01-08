@@ -5,16 +5,33 @@ module MultiWorker
         base.class_eval do
           @queue = opts[:queue]
 
-          @loner = opts.fetch(:loner, false) || opts.fetch(:unique, false)
-          @retry = opts.fetch(:retry, false)
-          @backtrace = opts.fetch(:backtrace, false)
+          if @retry = opts[:retry]
+            require "resque-retry"
+            extend ::Resque::Plugins::Retry
 
-          if opts.fetch(:lockable, false)
+            @retry_limit = @retry[:limit]
+            @retry_delay = @retry[:delay]
+          end
+
+          if @lock = opts[:lock]
+            require "resque-lock-timeout"
             extend ::Resque::Plugins::LockTimeout
 
-            if lock_timeout = opts[:lock_timeout]
-              @lock_timeout = lock_timeout.to_i
+            if @lock.is_a?(Hash) && @lock[:timeout]
+              @lock_timeout = @lock[:timeout].to_i
             end
+
+            if opts[:unique]
+              @loner = true
+            end
+          elsif opts[:unique]
+            require "resque-loner"
+            include ::Resque::Plugins::UniqueJob
+          end
+
+          if opts[:status]
+            require "resque-status"
+            include ::Resque::Plugins::Status
           end
 
           def self.perform(*args)
