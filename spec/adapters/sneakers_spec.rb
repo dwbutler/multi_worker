@@ -12,7 +12,7 @@ end
 describe MultiWorker do
   context "when Sneakers is loaded" do
     it "defaults to the :qu adapter" do
-      MultiWorker.default_adapter_name.should == :sneakers
+      MultiWorker.default_adapter.should == :sneakers
     end
   end
 

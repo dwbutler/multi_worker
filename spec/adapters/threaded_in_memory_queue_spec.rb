@@ -10,7 +10,7 @@ end
 describe MultiWorker do
   context "when ThreadedInMemoryQueue is loaded" do
     it "defaults to the :threaded_in_memory_queue adapter" do
-      MultiWorker.default_adapter_name.should == :threaded_in_memory_queue
+      MultiWorker.default_adapter.should == :threaded_in_memory_queue
     end
   end
 

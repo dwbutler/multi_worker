@@ -3,7 +3,7 @@ require 'test_workers'
 describe MultiWorker do
   context "when no other adapter is available" do
     it "defaults to the :inline adapter" do
-      MultiWorker.default_adapter_name.should == :inline
+      MultiWorker.default_adapter.should == :inline
     end
   end
 

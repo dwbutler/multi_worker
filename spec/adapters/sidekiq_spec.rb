@@ -13,7 +13,7 @@ end
 describe MultiWorker do
   context "when Sidekiq is loaded" do
     it "defaults to the :sidekiq adapter" do
-      MultiWorker.default_adapter_name.should == :sidekiq
+      MultiWorker.default_adapter.should == :sidekiq
     end
   end
 

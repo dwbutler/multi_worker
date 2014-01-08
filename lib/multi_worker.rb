@@ -1,9 +1,10 @@
 require "multi_worker/version"
-require "multi_worker/configuration"
 require "multi_worker/interface"
 
 module MultiWorker
   @adapters = {}
+  @default_queue = :default
+  @inline = false
 
   AdapterNames = [
     :resque,
@@ -23,12 +24,23 @@ module MultiWorker
     end
 
     def configure(&block)
-      MultiWorker::Configuration.class_eval do
-        yield
-      end
+      yield self
     end
 
-    def default_adapter_name
+    def default_options
+      {:queue => default_queue}
+    end
+
+    attr_accessor :default_queue
+    attr_accessor :inline
+
+    def default_adapter=(adapter_name)
+      @default_adapter = adapter_name
+    end
+
+    def default_adapter
+      return @default_adapter if @default_adapter
+
       return :resque if defined?(::Resque)
       return :sidekiq if defined?(::Sidekiq)
       return :delayed_job if defined?(::Delayed::Worker)
@@ -42,12 +54,12 @@ module MultiWorker
     end
 
     def adapter(name=nil)
-      name ||= default_adapter_name
+      name ||= default_adapter
       @adapters[name] ||= begin
         require "multi_worker/adapters/#{name}"
         klass_name = name.to_s.split('_').map(&:capitalize) * ''
         MultiWorker::Adapters.const_get(klass_name)
       end
-    end 
+    end
   end
 end

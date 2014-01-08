@@ -10,7 +10,7 @@ end
 describe MultiWorker do
   context "when Qu is loaded" do
     it "defaults to the :qu adapter" do
-      MultiWorker.default_adapter_name.should == :qu
+      MultiWorker.default_adapter.should == :qu
     end
   end
 

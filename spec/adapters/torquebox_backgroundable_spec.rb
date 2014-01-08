@@ -16,7 +16,7 @@ end
 describe MultiWorker do
   context "when TorqueBox::Messaging::Backgroundable is loaded" do
     it "defaults to the :sidekiq adapter" do
-      MultiWorker.default_adapter_name.should == :torquebox_backgroundable
+      MultiWorker.default_adapter.should == :torquebox_backgroundable
     end
   end
 

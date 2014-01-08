@@ -10,7 +10,7 @@ end
 describe MultiWorker do
   context "when Resque is loaded" do
     it "defaults to the :resque adapter" do
-      MultiWorker.default_adapter_name.should == :resque
+      MultiWorker.default_adapter.should == :resque
     end
   end
 

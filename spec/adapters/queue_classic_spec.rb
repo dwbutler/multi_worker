@@ -22,7 +22,7 @@ end
 describe MultiWorker do
   context "when Queue Classic is loaded" do
     it "defaults to the :sidekiq adapter" do
-      MultiWorker.default_adapter_name.should == :queue_classic
+      MultiWorker.default_adapter.should == :queue_classic
     end
   end
 

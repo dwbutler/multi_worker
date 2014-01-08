@@ -13,7 +13,7 @@ end
 describe MultiWorker do
   context "when Delayed::Job is loaded" do
     it "defaults to the :delayed_job adapter" do
-      MultiWorker.default_adapter_name.should == :delayed_job
+      MultiWorker.default_adapter.should == :delayed_job
     end
   end
 

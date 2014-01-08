@@ -14,7 +14,7 @@ module MultiWorker
     # class WorkerClass
     # worker :queue => :processing, :loner => true
     def worker(opts={})
-      opts = MultiWorker::Configuration.default_options.merge(opts)
+      opts = MultiWorker.default_options.merge(opts)
       adapter_klass = MultiWorker.adapter(opts[:adapter])
       adapter_klass.configure(self, opts)
     end
