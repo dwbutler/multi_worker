@@ -4,7 +4,6 @@ require "multi_worker/interface"
 module MultiWorker
   @adapters = {}
   @default_queue = :default
-  @inline = false
 
   AdapterNames = [
     :resque,
@@ -24,46 +23,49 @@ module MultiWorker
     end
 
     def configure(&block)
-      yield self
+      instance_eval &block
     end
 
-    def default_options
-      {
+    def default_options(opts={})
+      @default_options ||= {
+        :adapter => default_adapter,
         :queue => default_queue,
         :status => false,
         :retry => false,
         :lock => false,
         :unique => false
       }
+
+      if opts && !opts.empty?
+        @default_options.merge!(opts)
+      end
+
+      @default_options
     end
 
     attr_accessor :default_queue
-    attr_accessor :inline
 
-    def default_adapter=(adapter_name)
-      @default_adapter = adapter_name
+    def default_adapter(adapter_name=nil)
+      return (@default_adapter = adapter_name) if (adapter_name && !adapter_name.empty?)
+
+      @default_adapter ||= case
+        when defined?(::Resque) then :resque
+        when defined?(::Sidekiq) then :sidekiq
+        when defined?(::Delayed::Worker) then :delayed_job
+        when defined?(::Qu) then :qu
+        when defined?(::QC::Queue) then :queue_classic
+        when defined?(::Sneakers::Worker) then :sneakers
+        when defined?(::TorqueBox::Messaging::Backgroundable) then :torquebox_backgroundable
+        when defined?(::ThreadedInMemoryQueue) then :threaded_in_memory_queue
+        else :inline
+      end
     end
 
-    def default_adapter
-      return @default_adapter if @default_adapter
-
-      return :resque if defined?(::Resque)
-      return :sidekiq if defined?(::Sidekiq)
-      return :delayed_job if defined?(::Delayed::Worker)
-      return :qu if defined?(::Qu)
-      return :queue_classic if defined?(::QC::Queue)
-      return :sneakers if defined?(::Sneakers::Worker)
-      return :torquebox_backgroundable if defined?(::TorqueBox::Messaging::Backgroundable)
-      return :threaded_in_memory_queue if defined?(::ThreadedInMemoryQueue)
-
-      return :inline
-    end
-
-    def adapter(name=nil)
-      name ||= default_adapter
-      @adapters[name] ||= begin
-        require "multi_worker/adapters/#{name}"
-        klass_name = name.to_s.split('_').map(&:capitalize) * ''
+    def adapter(adapter_name=nil)
+      adapter_name ||= default_adapter
+      @adapters[adapter_name] ||= begin
+        require "multi_worker/adapters/#{adapter_name}"
+        klass_name = adapter_name.to_s.split('_').map(&:capitalize) * ''
         MultiWorker::Adapters.const_get(klass_name)
       end
     end
