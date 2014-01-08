@@ -1,6 +1,6 @@
 require 'sidekiq'
 require 'sidekiq/testing'
-::Sidekiq::Testing.inline!
+::Sidekiq::Testing.fake!
 
 require 'test_workers'
 
@@ -19,10 +19,13 @@ describe MultiWorker do
 
   context "when using the :sidekiq adapter" do
     it "performs the work using Sidekiq" do
-      pending
-      expect(TestWorker).to receive(:perform).exactly(3).times.with("foo")
       TestWorker.perform_async("foo")
       MultiWorker.enqueue(TestWorker, "foo")
+      TestWorker.jobs.size.should == 2
+    end
+
+    it "forwards ::perform to #perform" do
+      expect(TestWorker).to receive(:perform).once.with("foo")
       TestWorker.perform("foo")
     end
   end

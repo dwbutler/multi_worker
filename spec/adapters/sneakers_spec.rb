@@ -21,7 +21,7 @@ describe MultiWorker do
 
     context "when calling #perform_async" do
       it "publishes a message to the queue" do
-        expect(worker.queue.exchange).to receive(:publish).once
+        expect(::Sneakers).to receive(:publish).once
         worker.perform_async("foo")
       end
     end

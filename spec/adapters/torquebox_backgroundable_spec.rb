@@ -21,15 +21,9 @@ describe MultiWorker do
   end
 
   context "when using the :torquebox_backgroundable adapter" do
-    before(:each) do
-      @queue = mock('queue')
-      @queue.stub(:publish)
-      TorqueBox::Messaging::Queue.stub(:new).and_return(@queue)
-      TorqueBox::Messaging::Future.stub(:unique_id).and_return('1234')
-    end
-
     it "puts a message on the queue" do
-      @queue.should_receive(:publish).exactly(2).times
+      #@queue.should_receive(:publish).exactly(2).times
+      TorqueBox::Messaging::Backgroundable::Util.should_receive(:publish_message).exactly(2).times
       TestWorker.perform_async("foo")
       MultiWorker.enqueue(TestWorker, "foo")
     end

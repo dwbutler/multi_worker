@@ -22,8 +22,8 @@ module MultiWorker
           end
 
           def perform_async(*args)
-            #self.class.perform_async(*args)
-            @queue.exchange.publish(args.to_json, :to_queue => @queue)
+            self.class.perform_async(*args)
+            #@queue.exchange.publish(args.to_json, :to_queue => @queue)
           end
         end
       end
