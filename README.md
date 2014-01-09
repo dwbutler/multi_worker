@@ -95,7 +95,8 @@ end
 | Queue Classic            | PostgreSQL           |          |          |      |        |          | ✓         | X      |
 | Sneakers                 | RabbitMQ             |          |          |      |        |          | X         | X      |
 | TorqueBox Backgroundable | HornetQ              | Built in |          |      |        | Built in | X         | X      |
-| Threaded in Memory Queue | N/A                  |          |          |      |        |          | N/A       | ✓      |
+| Threaded in Memory Queue | In-Memory            |          |          |      |        |          | N/A       | ✓      |
+| Sucker Punch             | In-Memory            |          |          |      |        |          | N/A       | ✓      |
 | Inline                   | N/A                  |          |          |      |        |          | N/A       | ✓      |
 
 ## Contributing

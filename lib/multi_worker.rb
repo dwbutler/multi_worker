@@ -14,6 +14,7 @@ module MultiWorker
     :sneakers,
     :torquebox_backgroundable,
     :threaded_in_memory_queue,
+    :sucker_punch,
     :inline
   ]
 
@@ -57,6 +58,7 @@ module MultiWorker
         when defined?(::Sneakers::Worker) then :sneakers
         when defined?(::TorqueBox::Messaging::Backgroundable) then :torquebox_backgroundable
         when defined?(::ThreadedInMemoryQueue) then :threaded_in_memory_queue
+        when defined?(::SuckerPunch::Job) then :sucker_punch
         else :inline
       end
     end
