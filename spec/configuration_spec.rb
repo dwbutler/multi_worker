@@ -40,5 +40,20 @@ describe MultiWorker do
 
       MultiWorker.instance_variable_set(:@default_options, nil)
     end
+
+    it 'allows default options to be overriden on the worker' do
+      MultiWorker.configure do
+        default_adapter :foo
+      end
+
+      require 'multi_worker/adapters/inline'
+      MultiWorker::Adapters::Inline.should_receive(:configure) do |klass, opts|
+        opts[:queue].should == :background
+      end
+
+      custom_worker = Class.new do
+        worker :adapter => :inline, :queue => :background
+      end
+    end
   end
 end
