@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dwbutler@ucla.edu"]
   spec.summary       = %q{Provides a common interface to Ruby worker/queue libraries.}
   spec.description   = %q{Provides a common interface to Ruby worker/queue libraries.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/dwbutler/multi_worker"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

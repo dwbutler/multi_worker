@@ -1,4 +1,4 @@
-# MultiWorker
+# MultiWorker [![Build Status](https://travis-ci.org/dwbutler/multi_worker.png?branch=master)](https://travis-ci.org/dwbutler/multi_worker)
 
 MultiWorker provides a common interface to the (many) Ruby queueing/worker libraries.
 They are all very similar, but provide slightly different interfaces. This makes it difficult
@@ -24,7 +24,7 @@ Or install it yourself as:
 
 ## Basic Usage
 
-### Define Worker
+### Define worker
 
 ```ruby
 require 'sidekiq'
@@ -37,12 +37,17 @@ class ExampleWorker
     # long running code
   end
 end
+```
 
+### Queue in jobs
+
+```
 ExampleWorker.perform_async(1, 2)
+# Equivalent:
 MultiWorker.enqueue(ExampleWorker, 1, 2)
 ```
 
-## Work jobs
+### Work jobs
 
 Add to Rakefile:
 ```ruby
