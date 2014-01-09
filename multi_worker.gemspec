@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = MultiWorker::VERSION
   spec.authors       = ["David Butler"]
   spec.email         = ["dwbutler@ucla.edu"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Provides a common interface to Ruby worker/queue libraries.}
+  spec.description   = %q{Provides a common interface to Ruby worker/queue libraries.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "resque-status"
   spec.add_development_dependency "resque-loner"
   spec.add_development_dependency "resque-lock-timeout"
+  spec.add_development_dependency "resque-delay"
 
   spec.add_development_dependency "sidekiq"
   spec.add_development_dependency "sidekiq-lock"
