@@ -21,5 +21,9 @@ describe MultiWorker do
       MultiWorker.enqueue(TestWorker, "foo")
       TestWorker.perform("foo")
     end
+
+    it "exposes the Qu rake task" do
+      MultiWorker.adapter.rake_task.name.should == "qu:work"
+    end
   end
 end

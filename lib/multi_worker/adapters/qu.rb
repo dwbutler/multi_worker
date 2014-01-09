@@ -18,6 +18,13 @@ module MultiWorker
           end
         end
       end
+
+      def self.rake_task
+        require 'rake'
+        require 'qu/tasks'
+
+        ::Rake::Task['qu:work']
+      end
     end
   end
 end

@@ -66,5 +66,9 @@ describe MultiWorker do
         status_worker.should include ::Resque::Plugins::Status
       end
     end
+
+    it "exposes the Resque rake task" do
+      MultiWorker.adapter.rake_task.name.should == "resque:work"
+    end
   end
 end

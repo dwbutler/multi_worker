@@ -21,7 +21,7 @@ end
 
 describe MultiWorker do
   context "when Queue Classic is loaded" do
-    it "defaults to the :sidekiq adapter" do
+    it "defaults to the :queue_classic adapter" do
       MultiWorker.default_adapter.should == :queue_classic
     end
   end
@@ -32,6 +32,10 @@ describe MultiWorker do
       TestWorker.perform_async("foo")
       MultiWorker.enqueue(TestWorker, "foo")
       TestWorker.perform("foo")
+    end
+
+    it "exposes the Queue Classic rake task" do
+      MultiWorker.adapter.rake_task.name.should == "qc:work"
     end
   end
 end

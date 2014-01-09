@@ -24,6 +24,8 @@ Or install it yourself as:
 
 ## Basic Usage
 
+### Define Worker
+
 ```ruby
 require 'sidekiq'
 require 'multi_worker'
@@ -38,6 +40,25 @@ end
 
 ExampleWorker.perform_async(1, 2)
 MultiWorker.enqueue(ExampleWorker, 1, 2)
+```
+
+## Work jobs
+
+Add to Rakefile:
+```ruby
+require 'resque'
+require 'multi_worker/tasks'
+
+# If not using Rails, define your own :environment task that will require dependencies
+task :environment do
+  require 'resque'
+end
+```
+
+Run:
+
+```
+QUEUE=default rake multi_worker:work
 ```
 
 ## Advanced Configuration
@@ -60,17 +81,17 @@ end
 
 ## Feature Comparison
 
-| Library                  | Backends             | Status   | Retry    | Lock | Unique | Delayed  | Inline |
-|--------------------------|----------------------|----------|----------|------|--------|----------|--------|
-| Resque                   | Redis                | Gem      | Gem      | Gem  | Gem    | Gem      | ✓      |
-| Sidekiq                  | Redis                | Gem      | Built in | Gem  | Gem    | Built in | ✓      |
-| Delayed Job              | Active Record, Mongo |          |          |      |        | Built in | ✓      |
-| Qu                       | Redis, Mongo, SQS    |          |          |      |        |          | ✓      |
-| Queue Classic            | PostgreSQL           |          |          |      |        |          | X      |
-| Sneakers                 | RabbitMQ             |          |          |      |        |          | X      |
-| TorqueBox Backgroundable | HornetQ              | Built in |          |      |        | Built in | X      |
-| Threaded in Memory Queue | N/A                  |          |          |      |        |          | ✓      |
-| Inline                   | N/A                  |          |          |      |        |          | ✓      |
+| Library                  | Backends             | Status   | Retry    | Lock | Unique | Delayed  | Rake Task | Inline |
+|--------------------------|----------------------|----------|----------|------|--------|----------|-----------|--------|
+| Resque                   | Redis                | Gem      | Gem      | Gem  | Gem    | Gem      | ✓         | ✓      |
+| Sidekiq                  | Redis                | Gem      | Built in | Gem  | Gem    | Built in | X         | ✓      |
+| Delayed Job              | Active Record, Mongo |          |          |      |        | Built in | ✓         | ✓      |
+| Qu                       | Redis, Mongo, SQS    |          |          |      |        |          | ✓         | ✓      |
+| Queue Classic            | PostgreSQL           |          |          |      |        |          | ✓         | X      |
+| Sneakers                 | RabbitMQ             |          |          |      |        |          | X         | X      |
+| TorqueBox Backgroundable | HornetQ              | Built in |          |      |        | Built in | X         | X      |
+| Threaded in Memory Queue | N/A                  |          |          |      |        |          | N/A       | ✓      |
+| Inline                   | N/A                  |          |          |      |        |          | N/A       | ✓      |
 
 ## Contributing
 

@@ -47,6 +47,13 @@ module MultiWorker
           end
         end
       end
+
+      def self.rake_task
+        require 'rake'
+        require 'resque/tasks'
+
+        ::Rake::Task['resque:work']
+      end
     end
   end
 end

@@ -24,5 +24,9 @@ describe MultiWorker do
       MultiWorker.enqueue(TestWorker, "foo")
       TestWorker.perform("foo")
     end
+
+    it "exposes the Delayed Job rake task" do
+      MultiWorker.adapter.rake_task.name.should == "jobs:work"
+    end
   end
 end

@@ -18,6 +18,13 @@ module MultiWorker
           end
         end
       end
+
+      def self.rake_task
+        require 'rake'
+        require 'delayed/tasks'
+
+        ::Rake::Task['jobs:work']
+      end
     end
   end
 end
