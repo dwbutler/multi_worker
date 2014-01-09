@@ -39,9 +39,9 @@ class ExampleWorker
 end
 ```
 
-### Queue in jobs
+### Queue jobs
 
-```
+```ruby
 ExampleWorker.perform_async(1, 2)
 # Equivalent:
 MultiWorker.enqueue(ExampleWorker, 1, 2)
@@ -100,7 +100,7 @@ end
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/multi_worker/fork )
+1. Fork it ( http://github.com/dwbutler/multi_worker/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
