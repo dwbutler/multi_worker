@@ -15,6 +15,7 @@ module MultiWorker
     :torquebox_backgroundable,
     :threaded_in_memory_queue,
     :sucker_punch,
+    :backburner,
     :inline
   ]
 
@@ -59,6 +60,7 @@ module MultiWorker
         when defined?(::TorqueBox::Messaging::Backgroundable) then :torquebox_backgroundable
         when defined?(::ThreadedInMemoryQueue) then :threaded_in_memory_queue
         when defined?(::SuckerPunch::Job) then :sucker_punch
+        when defined?(::Backburner) then :backburner
         else :inline
       end
     end

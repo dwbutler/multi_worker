@@ -48,5 +48,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "sucker_punch"
 
+  spec.add_development_dependency "backburner"
+
   spec.add_development_dependency "torquebox-messaging" if (RUBY_ENGINE == "jruby")
 end

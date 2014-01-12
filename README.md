@@ -89,12 +89,13 @@ end
 | Library                  | Backends             | Status   | Retry    | Lock | Unique | Delayed  | Rake Task | Inline |
 |--------------------------|----------------------|----------|----------|------|--------|----------|-----------|--------|
 | Resque                   | Redis                | Gem      | Gem      | Gem  | Gem    | Gem      | ✓         | ✓      |
-| Sidekiq                  | Redis                | Gem      | Built in | Gem  | Gem    | Built in | X         | ✓      |
+| Sidekiq                  | Redis                | Gem      | Built in | Gem  | Gem    | Built in | ✗         | ✓      |
 | Delayed Job              | Active Record, Mongo |          |          |      |        | Built in | ✓         | ✓      |
 | Qu                       | Redis, Mongo, SQS    |          |          |      |        |          | ✓         | ✓      |
-| Queue Classic            | PostgreSQL           |          |          |      |        |          | ✓         | X      |
-| Sneakers                 | RabbitMQ             |          |          |      |        |          | X         | X      |
-| TorqueBox Backgroundable | HornetQ              | Built in |          |      |        | Built in | X         | X      |
+| Queue Classic            | PostgreSQL           |          |          |      |        |          | ✓         | ✗      |
+| Sneakers                 | RabbitMQ             |          |          |      |        |          | ✗         | ✗      |
+| TorqueBox Backgroundable | HornetQ              | Built in |          |      |        | Built in | ✗         | ✗      |
+| Backburner               | Beanstalkd           |          | Built in |      |        | Built in | ✓         | ✓      |
 | Threaded in Memory Queue | In-Memory            |          |          |      |        |          | N/A       | ✓      |
 | Sucker Punch             | In-Memory            |          |          |      |        |          | N/A       | ✓      |
 | Inline                   | N/A                  |          |          |      |        |          | N/A       | ✓      |
