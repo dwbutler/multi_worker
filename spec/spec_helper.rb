@@ -2,7 +2,6 @@
 require 'multi_worker'
 #require 'pry'
 $LOAD_PATH << File.expand_path('.')
-#require 'pry'
 
 def jruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'

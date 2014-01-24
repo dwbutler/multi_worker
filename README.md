@@ -86,19 +86,20 @@ end
 
 ## Feature Comparison
 
-| Library                  | Backends             | Status   | Retry    | Lock | Unique | Delayed  | Rake Task | Inline |
-|--------------------------|----------------------|----------|----------|------|--------|----------|-----------|--------|
-| Resque                   | Redis                | Gem      | Gem      | Gem  | Gem    | Gem      | ✓         | ✓      |
-| Sidekiq                  | Redis                | Gem      | Built in | Gem  | Gem    | Built in | ✗         | ✓      |
-| Delayed Job              | Active Record, Mongo |          |          |      |        | Built in | ✓         | ✓      |
-| Qu                       | Redis, Mongo, SQS    |          |          |      |        |          | ✓         | ✓      |
-| Queue Classic            | PostgreSQL           |          |          |      |        |          | ✓         | ✗      |
-| Sneakers                 | RabbitMQ             |          |          |      |        |          | ✗         | ✗      |
-| TorqueBox Backgroundable | HornetQ              | Built in |          |      |        | Built in | ✗         | ✗      |
-| Backburner               | Beanstalkd           |          | Built in |      |        | Built in | ✓         | ✓      |
-| Threaded in Memory Queue | In-Memory            |          |          |      |        |          | N/A       | ✓      |
-| Sucker Punch             | In-Memory            |          |          |      |        |          | N/A       | ✓      |
-| Inline                   | N/A                  |          |          |      |        |          | N/A       | ✓      |
+| Library                  | Backends             | Status | Retry | Lock | Unique | Scheduling | Priority | Async Method Proxy | Rake Task | Inline |
+|--------------------------|----------------------|--------|-------|------|--------|------------|----------|--------------------|-----------|--------|
+| Resque                   | Redis                | Gem    | Gem   | Gem  | Gem    | Gem        |          | Gem                | ✓         | ✓      |
+| Sidekiq                  | Redis                | Gem    | ✓     | Gem  | Gem    | ✓          |          | ✓                  | ✗         | ✓      |
+| Delayed Job              | Active Record, Mongo |        |       |      |        | ✓          |          | ✓                  | ✓         | ✓      |
+| Qu                       | Redis, Mongo, SQS    |        |       |      |        |            |          |                    | ✓         | ✓      |
+| Queue Classic            | PostgreSQL           |        |       |      |        |            |          |                    | ✓         | ✗      |
+| Que                      | PostgreSQL           |        |       |      |        | ✓          | ✓        |                    | ✓         | ✓      |
+| Sneakers                 | RabbitMQ             |        |       |      |        |            |          |                    | ✗         | ✗      |
+| TorqueBox Backgroundable | HornetQ              | ✓      |       |      |        |            |          | ✓                  | ✗         | ✗      |
+| Backburner               | Beanstalkd           |        | ✓     |      |        | ✓          | ✓        | ✓                  | ✓         | ✓      |
+| Threaded in Memory Queue | In-Memory            |        |       |      |        |            |          |                    | N/A       | ✓      |
+| Sucker Punch             | In-Memory            |        |       |      |        |            |          |                    | N/A       | ✓      |
+| Inline                   | N/A                  |        |       |      |        |            |          |                    | N/A       | ✓      |
 
 ## Contributing
 

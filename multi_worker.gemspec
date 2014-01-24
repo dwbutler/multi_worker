@@ -41,6 +41,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "qu", "0.2.0"
 
   spec.add_development_dependency "queue_classic" unless (RUBY_ENGINE == "jruby")
+  
+  spec.add_development_dependency "que"
 
   spec.add_development_dependency "sneakers"
 

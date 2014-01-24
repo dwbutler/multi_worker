@@ -11,6 +11,7 @@ module MultiWorker
     :delayed_job,
     :qu,
     :queue_classic,
+    :que,
     :sneakers,
     :torquebox_backgroundable,
     :threaded_in_memory_queue,
@@ -56,6 +57,7 @@ module MultiWorker
         when defined?(::Delayed::Worker) then :delayed_job
         when defined?(::Qu) then :qu
         when defined?(::QC::Queue) then :queue_classic
+        when defined?(::Que) then :que
         when defined?(::Sneakers::Worker) then :sneakers
         when defined?(::TorqueBox::Messaging::Backgroundable) then :torquebox_backgroundable
         when defined?(::ThreadedInMemoryQueue) then :threaded_in_memory_queue
