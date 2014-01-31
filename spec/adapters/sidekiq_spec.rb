@@ -30,13 +30,37 @@ describe MultiWorker do
     end
 
     context "with advanced options" do
-      it "configures :retry option" do
-        retry_worker = Class.new do
-          worker :retry => {:limit => 10, :delay => lambda {|count| count*5} }
+      context "when configuring the :retry option" do
+        context "with a hash" do
+          it "configures limit and delay" do
+            retry_worker = Class.new do
+              worker :retry => {:limit => 10, :delay => lambda {|count| count*5} }
+            end
+
+            retry_worker.get_sidekiq_options['retry'].should == 10
+            retry_worker.sidekiq_retry_in_block.call(3).should == 15
+          end
         end
 
-        retry_worker.get_sidekiq_options['retry'].should == 10
-        retry_worker.sidekiq_retry_in_block.call(3).should == 15
+        context "with a number" do
+          it "configures limit" do
+            retry_worker = Class.new do
+              worker :retry => 15
+            end
+
+            retry_worker.get_sidekiq_options['retry'].should == 15
+          end
+        end
+
+        context "with a boolean" do
+          it "configures retry" do
+            retry_worker = Class.new do
+              worker :retry => true
+            end
+
+            retry_worker.get_sidekiq_options['retry'].should == true
+          end
+        end
       end
 
       it "configures :lock option" do
@@ -44,7 +68,7 @@ describe MultiWorker do
           worker :lock => true
         end
 
-        locking_worker.get_sidekiq_options['lock'].should be_true
+        locking_worker.get_sidekiq_options['lock'].should == true
       end
 
       it "configures :unique option" do
@@ -52,7 +76,7 @@ describe MultiWorker do
           worker :unique => true
         end
 
-        unique_worker.get_sidekiq_options['unique'].should be_true
+        unique_worker.get_sidekiq_options['unique'].should == true
       end
 
       it "configures :status option" do
