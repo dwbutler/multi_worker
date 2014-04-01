@@ -1,5 +1,5 @@
 # MultiWorker
-[![Build Status](https://travis-ci.org/dwbutler/multi_worker.png?branch=master)](https://travis-ci.org/dwbutler/multi_worker) [![Code Climate](https://codeclimate.com/github/dwbutler/multi_worker.png)](https://codeclimate.com/github/dwbutler/multi_worker)
+[![Build Status](https://travis-ci.org/dwbutler/multi_worker.png?branch=master)](https://travis-ci.org/dwbutler/multi_worker) [![Code Climate](https://codeclimate.com/github/dwbutler/multi_worker.png)](https://codeclimate.com/github/dwbutler/multi_worker) [![Dependency Status](https://gemnasium.com/dwbutler/multi_worker.svg)](https://gemnasium.com/dwbutler/multi_worker)
 
 MultiWorker provides a common interface to the (many) Ruby queueing/worker libraries.
 They are all very similar, but provide slightly different interfaces. This makes it difficult
