@@ -7,13 +7,13 @@ require 'test_workers'
 describe TestWorker do
   it_behaves_like "a worker"
 
-  it { TestWorker::Job.should be < ::Que::Job }
+  it { expect(TestWorker::Job).to be < ::Que::Job }
 end
 
 describe MultiWorker do
   context "when Que is loaded" do
     it "defaults to the :que adapter" do
-      MultiWorker.default_adapter.should == :que
+      expect(MultiWorker.default_adapter).to eq(:que)
     end
   end
 
@@ -38,7 +38,7 @@ describe MultiWorker do
     end
 
     it "exposes the Que rake task" do
-      MultiWorker.adapter.rake_task.name.should == "que:work"
+      expect(MultiWorker.adapter.rake_task.name).to eq("que:work")
     end
   end
 end

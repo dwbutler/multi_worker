@@ -12,13 +12,13 @@ end
 describe MultiWorker do
   context "when Sucker Punch is loaded" do
     it "defaults to the :sucker_punch adapter" do
-      MultiWorker.default_adapter.should == :sucker_punch
+      expect(MultiWorker.default_adapter).to eq(:sucker_punch)
     end
   end
 
   context "when using the :sucker_punch adapter" do
     before(:each) do
-      TestWorker.any_instance.should_receive(:perform).once.with("foo")
+      expect_any_instance_of(TestWorker).to receive(:perform).once.with("foo")
     end
 
     it "::perform_async uses Sucker Punch" do

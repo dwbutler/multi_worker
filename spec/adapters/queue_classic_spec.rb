@@ -22,7 +22,7 @@ end
 describe MultiWorker do
   context "when Queue Classic is loaded" do
     it "defaults to the :queue_classic adapter" do
-      MultiWorker.default_adapter.should == :queue_classic
+      expect(MultiWorker.default_adapter).to eq(:queue_classic)
     end
   end
 
@@ -35,7 +35,7 @@ describe MultiWorker do
     end
 
     it "exposes the Queue Classic rake task" do
-      MultiWorker.adapter.rake_task.name.should == "qc:work"
+      expect(MultiWorker.adapter.rake_task.name).to eq("qc:work")
     end
   end
 end

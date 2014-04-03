@@ -12,7 +12,7 @@ end
 describe MultiWorker do
   context "when Sneakers is loaded" do
     it "defaults to the :qu adapter" do
-      MultiWorker.default_adapter.should == :sneakers
+      expect(MultiWorker.default_adapter).to eq(:sneakers)
     end
   end
 

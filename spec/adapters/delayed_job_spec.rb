@@ -13,7 +13,7 @@ end
 describe MultiWorker do
   context "when Delayed::Job is loaded" do
     it "defaults to the :delayed_job adapter" do
-      MultiWorker.default_adapter.should == :delayed_job
+      expect(MultiWorker.default_adapter).to eq(:delayed_job)
     end
   end
 
@@ -26,7 +26,7 @@ describe MultiWorker do
     end
 
     it "exposes the Delayed Job rake task" do
-      MultiWorker.adapter.rake_task.name.should == "jobs:work"
+      expect(MultiWorker.adapter.rake_task.name).to eq("jobs:work")
     end
   end
 end

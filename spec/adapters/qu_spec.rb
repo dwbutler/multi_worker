@@ -10,7 +10,7 @@ end
 describe MultiWorker do
   context "when Qu is loaded" do
     it "defaults to the :qu adapter" do
-      MultiWorker.default_adapter.should == :qu
+      expect(MultiWorker.default_adapter).to eq(:qu)
     end
   end
 
@@ -23,7 +23,7 @@ describe MultiWorker do
     end
 
     it "exposes the Qu rake task" do
-      MultiWorker.adapter.rake_task.name.should == "qu:work"
+      expect(MultiWorker.adapter.rake_task.name).to eq("qu:work")
     end
   end
 end

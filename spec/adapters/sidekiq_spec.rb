@@ -13,7 +13,7 @@ end
 describe MultiWorker do
   context "when Sidekiq is loaded" do
     it "defaults to the :sidekiq adapter" do
-      MultiWorker.default_adapter.should == :sidekiq
+      expect(MultiWorker.default_adapter).to eq(:sidekiq)
     end
   end
 
@@ -21,7 +21,7 @@ describe MultiWorker do
     it "performs the work using Sidekiq" do
       TestWorker.perform_async("foo")
       MultiWorker.enqueue(TestWorker, "foo")
-      TestWorker.jobs.size.should == 2
+      expect(TestWorker.jobs.size).to eq(2)
     end
 
     it "forwards ::perform to #perform" do
@@ -37,8 +37,8 @@ describe MultiWorker do
               worker :retry => {:limit => 10, :delay => lambda {|count| count*5} }
             end
 
-            retry_worker.get_sidekiq_options['retry'].should == 10
-            retry_worker.sidekiq_retry_in_block.call(3).should == 15
+            expect(retry_worker.get_sidekiq_options['retry']).to eq(10)
+            expect(retry_worker.sidekiq_retry_in_block.call(3)).to eq(15)
           end
         end
 
@@ -48,7 +48,7 @@ describe MultiWorker do
               worker :retry => 15
             end
 
-            retry_worker.get_sidekiq_options['retry'].should == 15
+            expect(retry_worker.get_sidekiq_options['retry']).to eq(15)
           end
         end
 
@@ -58,7 +58,7 @@ describe MultiWorker do
               worker :retry => true
             end
 
-            retry_worker.get_sidekiq_options['retry'].should == true
+            expect(retry_worker.get_sidekiq_options['retry']).to eq(true)
           end
         end
       end
@@ -68,7 +68,7 @@ describe MultiWorker do
           worker :lock => true
         end
 
-        locking_worker.get_sidekiq_options['lock'].should == true
+        expect(locking_worker.get_sidekiq_options['lock']).to eq(true)
       end
 
       it "configures :unique option" do
@@ -76,7 +76,7 @@ describe MultiWorker do
           worker :unique => true
         end
 
-        unique_worker.get_sidekiq_options['unique'].should == true
+        expect(unique_worker.get_sidekiq_options['unique']).to eq(true)
       end
 
       it "configures :status option" do
@@ -84,7 +84,7 @@ describe MultiWorker do
           worker :status => true
         end
 
-        status_worker.new.should be_a ::SidekiqStatus::Worker
+        expect(status_worker.new).to be_a ::SidekiqStatus::Worker
       end
     end
   end
