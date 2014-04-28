@@ -1,6 +1,6 @@
 #require 'bundler/setup'
 require 'multi_worker'
-#require 'pry'
+require 'pry'
 $LOAD_PATH << File.expand_path('.')
 
 def jruby?
