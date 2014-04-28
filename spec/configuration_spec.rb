@@ -32,7 +32,7 @@ describe MultiWorker do
 
     it 'allows default options to be customized' do
       MultiWorker.configure do
-        default_options :retry => true, :unique => true
+        default_options retry: true, unique: true
       end
 
       expect(MultiWorker.default_options[:retry]).to eq(true)
@@ -54,7 +54,7 @@ describe MultiWorker do
       end
 
       custom_worker = Class.new do
-        worker :adapter => :inline, :queue => :background
+        worker adapter: :inline, queue: :background
       end
     end
   end

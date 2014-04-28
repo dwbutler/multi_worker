@@ -19,7 +19,7 @@ describe MultiWorker do
 
   context "when using the :que adapter" do
     before(:each) do
-      Que::Job.any_instance.stub(:destroy => true)
+      Que::Job.any_instance.stub(destroy: true)
     end
 
     it "forwards ::perform to #perform" do

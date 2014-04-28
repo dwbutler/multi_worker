@@ -34,7 +34,7 @@ describe MultiWorker do
         context "with a hash" do
           it "configures limit and delay" do
             retry_worker = Class.new do
-              worker :retry => {:limit => 10, :delay => lambda {|count| count*5} }
+              worker retry: {limit: 10, delay: lambda {|count| count*5} }
             end
 
             expect(retry_worker.get_sidekiq_options['retry']).to eq(10)
@@ -45,7 +45,7 @@ describe MultiWorker do
         context "with a number" do
           it "configures limit" do
             retry_worker = Class.new do
-              worker :retry => 15
+              worker retry: 15
             end
 
             expect(retry_worker.get_sidekiq_options['retry']).to eq(15)
@@ -55,7 +55,7 @@ describe MultiWorker do
         context "with a boolean" do
           it "configures retry" do
             retry_worker = Class.new do
-              worker :retry => true
+              worker retry: true
             end
 
             expect(retry_worker.get_sidekiq_options['retry']).to eq(true)
@@ -65,7 +65,7 @@ describe MultiWorker do
 
       it "configures :lock option" do
         locking_worker = Class.new do
-          worker :lock => true
+          worker lock: true
         end
 
         expect(locking_worker.get_sidekiq_options['lock']).to eq(true)
@@ -73,7 +73,7 @@ describe MultiWorker do
 
       it "configures :unique option" do
         unique_worker = Class.new do
-          worker :unique => true
+          worker unique: true
         end
 
         expect(unique_worker.get_sidekiq_options['unique']).to eq(true)
@@ -81,7 +81,7 @@ describe MultiWorker do
 
       it "configures :status option" do
         status_worker = Class.new do
-          worker :status => true
+          worker status: true
         end
 
         expect(status_worker.new).to be_a ::SidekiqStatus::Worker

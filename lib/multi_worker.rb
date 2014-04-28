@@ -31,12 +31,12 @@ module MultiWorker
 
     def default_options(opts={})
       @default_options ||= {
-        :adapter => default_adapter,
-        :queue => default_queue,
-        :status => false,
-        :retry => false,
-        :lock => false,
-        :unique => false
+        adapter: default_adapter,
+        queue: default_queue,
+        status: false,
+        retry: false,
+        lock: false,
+        unique: false
       }
 
       if opts && !opts.empty?

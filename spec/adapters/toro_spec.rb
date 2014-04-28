@@ -18,7 +18,7 @@ describe MultiWorker do
 
   context "when using the :toro adapter" do
     it "performs the work using Toro" do
-      expect(Toro::Client).to receive(:create_job).exactly(2).times.with({:class_name=>"TestWorker", :name=>nil, :args=>["foo"], :queue=>:default})
+      expect(Toro::Client).to receive(:create_job).exactly(2).times.with({class_name:"TestWorker", name:nil, args:["foo"], queue::default})
       TestWorker.perform_async("foo")
       MultiWorker.enqueue(TestWorker, "foo")
     end
@@ -32,7 +32,7 @@ describe MultiWorker do
         context "with a hash" do
           it "configures retry interval" do
             retry_worker = Class.new do
-              worker :retry => {:delay => 2.minutes}
+              worker retry: {delay: 2.minutes}
             end
 
             expect(retry_worker.toro_options[:retry_interval]).to eq(2.minutes)
@@ -42,7 +42,7 @@ describe MultiWorker do
         context "with an ActiveSupport::Duration" do
           it "configures retry interval" do
             retry_worker = Class.new do
-              worker :retry => 15.seconds
+              worker retry: 15.seconds
             end
 
             expect(retry_worker.toro_options[:retry_interval]).to eq(15.seconds)
@@ -52,7 +52,7 @@ describe MultiWorker do
         context "with a number" do
           it "configures retry interval" do
             retry_worker = Class.new do
-              worker :retry => 20
+              worker retry: 20
             end
 
             expect(retry_worker.toro_options[:retry_interval]).to eq(20)

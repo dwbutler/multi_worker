@@ -12,9 +12,9 @@ module MultiWorker
             @retry = opts[:retry]
             case @retry
               when Hash
-                @toro_options.merge!(:retry_interval => @retry[:delay])
+                @toro_options.merge!(retry_interval: @retry[:delay])
               when Fixnum, ActiveSupport::Duration
-                @toro_options.merge!(:retry_interval => @retry)
+                @toro_options.merge!(retry_interval: @retry)
             end
           end
 

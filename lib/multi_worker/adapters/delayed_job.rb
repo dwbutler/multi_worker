@@ -10,7 +10,7 @@ module MultiWorker
           end
 
           def self.perform_async(*args)
-            delay(:queue => @queue).perform(*args)
+            delay(queue: @queue).perform(*args)
           end
 
           def perform_async(*args)

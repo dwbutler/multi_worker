@@ -25,7 +25,7 @@ describe MultiWorker do
     context "with advanced options" do
       it "configures :retry option" do
         retry_worker = Class.new do
-          worker :retry => {:limit => 10, :delay => 5 }
+          worker retry: {limit: 10, delay: 5 }
         end
 
         expect(retry_worker).to be_a ::Resque::Plugins::Retry
@@ -35,7 +35,7 @@ describe MultiWorker do
 
       it "configures :lock option" do
         locking_worker = Class.new do
-          worker :lock => {:timeout => 5}
+          worker lock: {timeout: 5}
         end
 
         expect(locking_worker).to be_a ::Resque::Plugins::LockTimeout
@@ -44,7 +44,7 @@ describe MultiWorker do
 
       it "configures :unique option with :lock" do
         unique_worker = Class.new do
-          worker :lock => true, :unique => true
+          worker lock: true, unique: true
         end
 
         expect(unique_worker.instance_variable_get(:@loner)).to be_true
@@ -52,7 +52,7 @@ describe MultiWorker do
 
       it "configures :unique option without :lock" do
         unique_worker = Class.new do
-          worker :unique => true
+          worker unique: true
         end
 
         expect(unique_worker).to include ::Resque::Plugins::UniqueJob
@@ -60,7 +60,7 @@ describe MultiWorker do
 
       it "configures :status option" do
         status_worker = Class.new do
-          worker :status => true
+          worker status: true
         end
 
         expect(status_worker).to include ::Resque::Plugins::Status

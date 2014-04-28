@@ -18,7 +18,7 @@ module MultiWorker
           end
 
           def self.perform_async(*args)
-            ::Sneakers.publish(args.to_json, :to_queue => @queue)
+            ::Sneakers.publish(args.to_json, to_queue: @queue)
           end
 
           def perform_async(*args)

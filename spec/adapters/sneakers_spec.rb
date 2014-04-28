@@ -1,5 +1,5 @@
 require 'sneakers'
-Sneakers.configure(:env => 'test')
+Sneakers.configure(env: 'test')
 
 require 'test_workers'
 
