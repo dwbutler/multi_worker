@@ -63,6 +63,7 @@ module MultiWorker
         when defined?(::ThreadedInMemoryQueue) then :threaded_in_memory_queue
         when defined?(::SuckerPunch::Job) then :sucker_punch
         when defined?(::Backburner) then :backburner
+        when defined?(::Toro) then :toro
         else :inline
       end
     end

@@ -95,6 +95,7 @@ end
 | Qu                       | Redis, Mongo, SQS    |        |       |      |        |            |          |                    | ✓         | ✓      |
 | Queue Classic            | PostgreSQL           |        |       |      |        |            |          |                    | ✓         | ✗      |
 | Que                      | PostgreSQL           |        |       |      |        | ✓          | ✓        |                    | ✓         | ✓      |
+| Toro                     | PostgreSQL           | ✓      | ✓     |      |        | ✓          |          |                    | ✓         | ✗      |
 | Sneakers                 | RabbitMQ             |        |       |      |        |            |          |                    | ✗         | ✗      |
 | TorqueBox Backgroundable | HornetQ              | ✓      |       |      |        |            |          | ✓                  | ✗         | ✗      |
 | Backburner               | Beanstalkd           |        | ✓     |      |        | ✓          | ✓        | ✓                  | ✓         | ✓      |

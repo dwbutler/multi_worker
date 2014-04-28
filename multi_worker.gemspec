@@ -40,8 +40,13 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "qu", "0.2.0"
 
-  spec.add_development_dependency "queue_classic" unless (RUBY_ENGINE == "jruby")
-  
+  if RUBY_ENGINE == "jruby"
+    spec.add_development_dependency "torquebox-messaging"
+  else
+    spec.add_development_dependency "queue_classic"
+    spec.add_development_dependency "toro"
+  end
+
   spec.add_development_dependency "que"
 
   spec.add_development_dependency "sneakers"
@@ -51,6 +56,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sucker_punch"
 
   spec.add_development_dependency "backburner"
-
-  spec.add_development_dependency "torquebox-messaging" if (RUBY_ENGINE == "jruby")
 end
